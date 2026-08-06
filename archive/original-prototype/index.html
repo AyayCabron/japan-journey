@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Japan 2028 — The Journey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== LOADING SCREEN ===== -->
+<div id="loader">
+  <div class="loader-inner">
+    <span class="loader-jp" id="loaderJp">日本</span>
+    <span class="loader-en" id="loaderEn">Japan</span>
+    <span class="loader-status" id="loaderStatus">Loading itinerary...</span>
+    <div class="loader-track"><div class="loader-train">🚄</div></div>
+  </div>
+</div>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">
+      <svg class="torii-logo" viewBox="0 0 48 40" width="26" height="22" aria-hidden="true">
+        <rect x="4" y="8" width="40" height="4" rx="1"/>
+        <rect x="0" y="16" width="48" height="3" rx="1"/>
+        <rect x="9" y="19" width="4" height="19"/>
+        <rect x="35" y="19" width="4" height="19"/>
+      </svg>
+      <span>JAPAN 2028</span>
+    </a>
+    <div class="nav-links">
+      <a href="#overview">Overview</a>
+      <a href="#itinerary">Itinerary</a>
+      <a href="#cities">Cities</a>
+      <a href="#experiences">Experiences</a>
+      <a href="#budget">Budget</a>
+      <a href="#travelers">Travelers</a>
+      <a href="#passport">Passport</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header id="hero">
+  <div class="hero-bg">
+    <canvas id="rainCanvas"></canvas>
+    <div class="hero-glow g1"></div>
+    <div class="hero-glow g2"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">六人 · 二十日 · 一つの旅</p>
+    <h1 class="hero-title">JAPAN <span>2028</span></h1>
+    <p class="hero-sub">The Journey Begins</p>
+    <div class="hero-stats">
+      <div><strong>6</strong><span>Travelers</span></div>
+      <div class="dot"></div>
+      <div><strong>20</strong><span>Days</span></div>
+      <div class="dot"></div>
+      <div><strong>∞</strong><span>Memories</span></div>
+    </div>
+    <a href="#overview" class="btn-primary">Begin the Adventure →</a>
+  </div>
+  <div class="scroll-hint">scroll</div>
+</header>
+
+<main>
+
+<!-- ===== OVERVIEW ===== -->
+<section id="overview" class="section">
+  <div class="section-head">
+    <p class="eyebrow">概要 — 01</p>
+    <h2>Resumo da viagem</h2>
+  </div>
+
+  <div class="overview-grid">
+    <div class="glass-card countdown-card">
+      <span class="card-label">Contador regressivo</span>
+      <div class="countdown" id="countdown">
+        <div><strong id="cd-days">--</strong><span>dias</span></div>
+        <div><strong id="cd-hours">--</strong><span>horas</span></div>
+        <div><strong id="cd-min">--</strong><span>min</span></div>
+        <div><strong id="cd-sec">--</strong><span>seg</span></div>
+      </div>
+    </div>
+
+    <div class="glass-card weather-card">
+      <span class="card-label">Clima em Tokyo agora</span>
+      <div class="weather-display" id="weatherDisplay">
+        <span class="weather-icon">🌙</span>
+        <strong>18°C</strong>
+        <span class="weather-desc">Céu limpo, brisa leve</span>
+      </div>
+    </div>
+
+    <div class="glass-card rate-card">
+      <span class="card-label">Cotação</span>
+      <div class="rate-rows">
+        <div class="rate-row"><span>¥100 JPY</span><strong id="jpyRate">R$ 3,42</strong></div>
+        <div class="rate-row"><span>US$ 1</span><strong id="usdRate">R$ 5,58</strong></div>
+      </div>
+      <span class="rate-note">valores de referência — conecte uma API para dados em tempo real</span>
+    </div>
+
+    <div class="glass-card route-card">
+      <span class="card-label">Rota da viagem</span>
+      <div class="route-chain">
+        <span>Tokyo</span><i>→</i><span>Hakone</span><i>→</i><span>Kyoto</span><i>→</i><span>Nara</span><i>→</i><span>Osaka</span><i>→</i><span>Nagoya</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ITINERARY TIMELINE ===== -->
+<section id="itinerary" class="section alt">
+  <div class="section-head">
+    <p class="eyebrow">行程 — 02</p>
+    <h2>Linha do tempo</h2>
+  </div>
+  <div class="tl-legend">
+    <span class="tl-tag tag-travel">Deslocamento</span>
+    <span class="tl-tag tag-culture">Cultura</span>
+    <span class="tl-tag tag-tech">Tecnologia</span>
+    <span class="tl-tag tag-food">Alimentação</span>
+    <span class="tl-tag tag-shop">Compras / bugigangas</span>
+    <span class="tl-tag tag-park">Parques</span>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-travel">Deslocamento</span><strong>Voo</strong><p>Curitiba → São Paulo → Tokyo (Narita / Haneda)</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-culture">Cultura</span><strong>Chegada em Tokyo</strong><p>Shibuya Crossing, Hachiko, Shinjuku à noite</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-culture">Cultura</span><strong>Asakusa &amp; Ueno</strong><p>Senso-ji, Tokyo Skytree, Ueno Park</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-tech">Tecnologia</span><strong>Akihabara</strong><p>Yodobashi Camera, Bic Camera, Super Potato, Mandarake</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-food">Alimentação</span><strong>Rota do ramen &amp; sushi</strong><p>Ichiran, Ippudo, Uobei, Rokurinsha — e uma parada na konbini pra doces e bebidas</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-park">Parques</span><strong>Disney &amp; Universal</strong><p>Disneyland, DisneySea, Nintendo World</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-shop">Compras</span><strong>Bugigangas &amp; presentinhos</strong><p>Don Quijote, Daiso, Seria, 3Coins, Loft — itens pra casa e lembrancinhas</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-culture">Cultura</span><strong>Hakone</strong><p>Monte Fuji, teleférico, cruzeiro no Lago Ashi, onsen e ryokan</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-culture">Cultura</span><strong>Kyoto</strong><p>Fushimi Inari, Bamboo Forest, Gion, Kinkakuji</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-food">Alimentação</span><strong>Sabores de Kyoto</strong><p>Mercado Nishiki e doces tradicionais em Gion</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-culture">Cultura</span><strong>Nara</strong><p>Parque dos Cervos e templos</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-park">Parques</span><strong>Osaka</strong><p>Universal Studios (Super Nintendo World, Harry Potter), Dotonbori, Namba</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-shop">Compras</span><strong>Shinsaibashi</strong><p>Eletrônicos, tênis e mais uma rodada no Don Quijote</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-culture">Cultura</span><strong>Nagoya</strong><p>Ghibli Park, Castelo de Nagoya, bairro Osu</p></div></div>
+
+    <div class="tl-item"><span class="tl-dot"></span><div><span class="tl-tag tag-travel">Deslocamento</span><strong>Volta pra casa</strong><p>Tokyo → São Paulo → Curitiba</p></div></div>
+  </div>
+</section>
+
+<!-- ===== CITIES ===== -->
+<section id="cities" class="section" data-theme="tokyo">
+  <div class="section-head">
+    <p class="eyebrow">都市 — 03</p>
+    <h2>Cidades</h2>
+    <p class="section-desc">Cada cidade tem sua própria atmosfera. Clique em um cartão para sentir a mudança.</p>
+  </div>
+
+  <div class="city-grid" id="cityGrid">
+    <button class="city-card" data-theme="tokyo" data-days="9" data-places="42" data-budget="¥132.000">
+      <span class="city-name">Tokyo</span>
+      <span class="city-meta"><b>9</b> dias · <b>42</b> lugares</span>
+      <span class="city-budget">¥132.000</span>
+    </button>
+    <button class="city-card" data-theme="hakone" data-days="2" data-places="8" data-budget="¥38.000">
+      <span class="city-name">Hakone</span>
+      <span class="city-meta"><b>2</b> dias · <b>8</b> lugares</span>
+      <span class="city-budget">¥38.000</span>
+    </button>
+    <button class="city-card" data-theme="kyoto" data-days="4" data-places="20" data-budget="¥54.000">
+      <span class="city-name">Kyoto</span>
+      <span class="city-meta"><b>4</b> dias · <b>20</b> lugares</span>
+      <span class="city-budget">¥54.000</span>
+    </button>
+    <button class="city-card" data-theme="nara" data-days="1" data-places="6" data-budget="¥12.000">
+      <span class="city-name">Nara</span>
+      <span class="city-meta"><b>1</b> dia · <b>6</b> lugares</span>
+      <span class="city-budget">¥12.000</span>
+    </button>
+    <button class="city-card" data-theme="osaka" data-days="3" data-places="18" data-budget="¥46.000">
+      <span class="city-name">Osaka</span>
+      <span class="city-meta"><b>3</b> dias · <b>18</b> lugares</span>
+      <span class="city-budget">¥46.000</span>
+    </button>
+    <button class="city-card" data-theme="nagoya" data-days="1" data-places="9" data-budget="¥20.000">
+      <span class="city-name">Nagoya</span>
+      <span class="city-meta"><b>1</b> dia · <b>9</b> lugares</span>
+      <span class="city-budget">¥20.000</span>
+    </button>
+  </div>
+
+  <div class="city-detail" id="cityDetail">
+    <div class="city-detail-inner">
+      <h3 id="cityDetailName">Tokyo</h3>
+      <p id="cityDetailDesc">Neon, velocidade e contraste — bairros como Shibuya e Akihabara nunca dormem.</p>
+      <div class="city-detail-stats">
+        <div><strong id="cityDetailDays">9</strong><span>dias</span></div>
+        <div><strong id="cityDetailPlaces">42</strong><span>lugares</span></div>
+        <div><strong id="cityDetailBudget">¥132.000</strong><span>orçamento</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCES ===== -->
+<section id="experiences" class="section alt">
+  <div class="section-head">
+    <p class="eyebrow">体験 — 04</p>
+    <h2>Experiências</h2>
+  </div>
+
+  <div class="tabs" id="expTabs">
+    <button class="tab-btn active" data-tab="anime">Anime</button>
+    <button class="tab-btn" data-tab="tech">Tecnologia</button>
+    <button class="tab-btn" data-tab="shopping">Compras</button>
+    <button class="tab-btn" data-tab="food">Restaurantes</button>
+    <button class="tab-btn" data-tab="parks">Disney &amp; Universal</button>
+  </div>
+
+  <div class="tab-panel active" data-panel="anime">
+    <div class="chip-grid">
+      <span>Jump Shop</span><span>Pokémon Center</span><span>Nintendo Store</span><span>Animate</span>
+      <span>Mandarake</span><span>Super Potato</span><span>Ghibli Store</span><span>Mugiwara Store</span>
+      <span>Radio Kaikan</span><span>Nakano Broadway</span><span>Pokémon Café</span><span>Kirby Café</span>
+      <span>Square Enix Café</span><span>Capcom Café</span>
+    </div>
+  </div>
+
+  <div class="tab-panel" data-panel="tech">
+    <div class="chip-grid">
+      <span>Apple Store</span><span>Yodobashi Camera</span><span>Bic Camera</span><span>EDION</span>
+      <span>Sofmap</span><span>BookOff</span><span>HardOff</span><span>Yamada Denki</span>
+    </div>
+  </div>
+
+  <div class="tab-panel" data-panel="shopping">
+    <div class="chip-grid">
+      <span>Don Quijote</span><span>Mega Donki</span><span>Uniqlo</span><span>GU</span>
+      <span>Muji</span><span>Loft</span><span>Hands</span><span>Daiso</span>
+      <span>Seria</span><span>3Coins</span>
+    </div>
+  </div>
+
+  <div class="tab-panel" data-panel="food">
+    <div class="chip-grid">
+      <span>Ichiran</span><span>Ippudo</span><span>Gyukatsu Motomura</span><span>Kura Sushi</span>
+      <span>Sushiro</span><span>Uobei</span><span>Tonkatsu Maisen</span><span>Afuri</span>
+      <span>Rokurinsha</span><span>Sukiya</span><span>Yoshinoya</span><span>Matsuya</span>
+      <span>CoCo Ichibanya</span>
+    </div>
+  </div>
+
+  <div class="tab-panel" data-panel="parks">
+    <div class="park-grid">
+      <div class="park-card"><h4>Disneyland</h4><p>Fila média, mapa, fast pass e melhores brinquedos.</p></div>
+      <div class="park-card"><h4>DisneySea</h4><p>O parque exclusivo do Japão — só aqui no mundo.</p></div>
+      <div class="park-card"><h4>Universal Osaka</h4><p>Super Nintendo World, Harry Potter, Jurassic Park, Minions.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRAVELERS ===== -->
+<section id="travelers" class="section">
+  <div class="section-head">
+    <p class="eyebrow">旅行者 — 05</p>
+    <h2>Participantes</h2>
+  </div>
+  <div class="traveler-grid" id="travelerGrid">
+    <!-- injected by script.js -->
+  </div>
+</section>
+
+<!-- ===== BUDGET ===== -->
+<section id="budget" class="section alt">
+  <div class="section-head">
+    <p class="eyebrow">予算 — 06</p>
+    <h2>Dashboard financeiro</h2>
+  </div>
+
+  <div class="budget-hero">
+    <div class="budget-figure">
+      <span>Total</span>
+      <strong data-count="145000">R$ 0</strong>
+    </div>
+    <div class="budget-figure">
+      <span>Já pago</span>
+      <strong data-count="42000" class="paid">R$ 0</strong>
+    </div>
+    <div class="budget-figure">
+      <span>Restante</span>
+      <strong data-count="103000" class="remaining">R$ 0</strong>
+    </div>
+  </div>
+
+  <div class="budget-bar">
+    <div class="budget-bar-fill" id="budgetBarFill"></div>
+  </div>
+
+  <div class="budget-breakdown">
+    <div class="glass-card">
+      <h4>Por categoria</h4>
+      <div class="bars" id="categoryBars">
+        <div class="bar-row"><span>Passagem</span><div class="bar"><i style="--w:38%"></i></div><b>R$ 55.000</b></div>
+        <div class="bar-row"><span>Hospedagem</span><div class="bar"><i style="--w:22%"></i></div><b>R$ 32.000</b></div>
+        <div class="bar-row"><span>Disney / Universal</span><div class="bar"><i style="--w:12%"></i></div><b>R$ 17.500</b></div>
+        <div class="bar-row"><span>Alimentação</span><div class="bar"><i style="--w:14%"></i></div><b>R$ 20.000</b></div>
+        <div class="bar-row"><span>Compras</span><div class="bar"><i style="--w:9%"></i></div><b>R$ 13.000</b></div>
+        <div class="bar-row"><span>Transporte / Reserva</span><div class="bar"><i style="--w:5%"></i></div><b>R$ 7.500</b></div>
+      </div>
+    </div>
+    <div class="glass-card">
+      <h4>Por pessoa</h4>
+      <div class="bars" id="personBars"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CHECKLIST ===== -->
+<section id="checklist" class="section">
+  <div class="section-head">
+    <p class="eyebrow">準備 — 07</p>
+    <h2>Checklist</h2>
+    <p class="section-desc" id="checklistProgress">0 de 10 concluídos</p>
+  </div>
+  <div class="checklist-grid" id="checklistGrid">
+    <!-- injected by script.js -->
+  </div>
+</section>
+
+<!-- ===== PASSPORT ===== -->
+<section id="passport" class="section alt">
+  <div class="section-head">
+    <p class="eyebrow">パスポート — 08</p>
+    <h2>Passaporte digital</h2>
+    <p class="section-desc">Marque cada cidade como concluída durante a viagem e desbloqueie o selo.</p>
+  </div>
+
+  <div class="stamp-grid" id="stampGrid">
+    <!-- injected by script.js -->
+  </div>
+
+  <div class="journey-complete" id="journeyComplete">
+    <h3>Journey Complete — Japan 2028</h3>
+    <div class="jc-stats">
+      <div><strong>6</strong><span>🇯🇵 Cidades visitadas</span></div>
+      <div><strong id="jcKm">—</strong><span>🚄 Km percorridos</span></div>
+      <div><strong>20</strong><span>👣 Dias vividos</span></div>
+      <div><strong id="jcSpent">R$ 0</strong><span>💴 Total gasto</span></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== MT FUJI EASTER EGG ===== -->
+<div class="fuji-egg" id="fujiEgg" title="🗻">🗻</div>
+<div class="godzilla-egg" id="godzillaEgg">🦖</div>
+
+<footer>
+  <p>Japan 2028 — The Journey · feito para Dani, Baby, Claudinho Dinho, Rayo Lightyear, Tai &amp; Vini</p>
+  <p class="footer-hint">psst... tente digitar <code>konami</code></p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
