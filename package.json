@@ -1,0 +1,36 @@
+{
+  "name": "japan-journey",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@japan-journey/web",
+    "build:web": "npm run build --workspace=@japan-journey/web",
+    "lint:web": "npm run lint --workspace=@japan-journey/web",
+    "typecheck:web": "npm run typecheck --workspace=@japan-journey/web",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.{json,css,md,yml,yaml}": [
+      "prettier --write"
+    ]
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^17.3.0",
+    "prettier": "^3.9.6"
+  }
+}

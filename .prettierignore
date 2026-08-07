@@ -1,0 +1,8 @@
+Set-Content .prettierignore @(
+  'node_modules'
+  'dist'
+  'build'
+  'coverage'
+  'archive'
+  'package-lock.json'
+)
