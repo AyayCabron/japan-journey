@@ -1605,3 +1605,35 @@ footer {
     height: 240px;
   }
 }
+
+/*API STATUS*/
+.api-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.api-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #777;
+}
+
+.api-status-online i {
+  background: #42c767;
+  box-shadow: 0 0 10px rgba(66, 199, 103, 0.5);
+}
+
+.api-status-error i {
+  background: var(--red);
+}
+
+@media (max-width: 900px) {
+  .api-status {
+    display: none;
+  }
+}

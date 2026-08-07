@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ApiStatus } from './ApiStatus'
 
 const navigationItems = [
   { label: 'Overview', href: '#overview' },
@@ -50,7 +51,7 @@ export function Navbar() {
             </a>
           ))}
         </div>
-
+        <ApiStatus />
         <button
           type="button"
           className="nav-toggle"
