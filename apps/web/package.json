@@ -14,7 +14,10 @@
     "@supabase/supabase-js": "^2.112.2",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "recharts": "^3.10.1"
+    "recharts": "^3.10.1",
+    "@japan-journey/config": "0.1.0",
+    "@japan-journey/sdk": "0.1.0",
+    "@japan-journey/types": "0.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

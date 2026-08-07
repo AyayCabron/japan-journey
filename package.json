@@ -17,9 +17,12 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "apps/web/**/*.{js,jsx,ts,tsx}": [
       "prettier --write",
       "eslint --fix"
+    ],
+    "packages/**/*.{js,jsx,ts,tsx}": [
+      "prettier --write"
     ],
     "*.{json,css,md,yml,yaml}": [
       "prettier --write"

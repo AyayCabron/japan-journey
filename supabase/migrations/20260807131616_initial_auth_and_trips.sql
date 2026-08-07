@@ -101,3 +101,72 @@ $$;
 create trigger on_trip_created
   after insert on public.trips
   for each row execute procedure public.handle_new_trip();
+
+
+alter table public.profiles enable row level security;
+alter table public.trips enable row level security;
+alter table public.trip_members enable row level security;
+
+
+create policy "profiles_select_own"
+on public.profiles
+for select
+to authenticated
+using (
+  id = auth.uid()
+);
+
+create policy "profiles_update_own"
+on public.profiles
+for update
+to authenticated
+using (
+  id = auth.uid()
+)
+with check (
+  id = auth.uid()
+);
+
+create policy "trip_members_select_own"
+on public.trip_members
+for select
+to authenticated
+using (
+  user_id = auth.uid()
+);
+
+create policy "trips_select_member"
+on public.trips
+for select
+to authenticated
+using (
+  exists (
+    select 1
+    from public.trip_members
+    where trip_members.trip_id = trips.id
+      and trip_members.user_id = auth.uid()
+  )
+);
+
+create policy "trips_insert_owner"
+on public.trips
+for insert
+to authenticated
+with check (
+  owner_id = auth.uid()
+);
+
+create policy "trips_update_editor"
+on public.trips
+for update
+to authenticated
+using (
+  exists (
+    select 1
+    from public.trip_members
+    where trip_members.trip_id = trips.id
+      and trip_members.user_id = auth.uid()
+      and trip_members.role in ('owner', 'editor')
+  )
+);
+
