@@ -4,11 +4,12 @@
  */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "api",
+	"name": "japan-journey-api",
 	"main": "src/entry.py",
 	"compatibility_date": "2026-08-07",
 	"compatibility_flags": [
-		"python_workers"
+		"python_workers",
+    "disable_python_external_sdk"
 	],
 	"observability": {
 		"enabled": true
