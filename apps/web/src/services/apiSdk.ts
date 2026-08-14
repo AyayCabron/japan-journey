@@ -1,4 +1,4 @@
-import { createTripClient } from '@japan-journey/sdk'
+import { itineraryClient, createTripClient } from '@japan-journey/sdk'
 import { supabase } from './supabaseClient'
 
 const apiUrl = import.meta.env.VITE_API_URL
@@ -19,3 +19,5 @@ export const tripClient = createTripClient({
   baseUrl: apiUrl,
   getAccessToken,
 })
+
+export { itineraryClient }

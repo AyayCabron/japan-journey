@@ -1,3 +1,6 @@
+import { useState } from 'react'
+import type { Trip } from '@japan-journey/types'
+
 import { Hero } from './components/Hero'
 import { Navbar } from './components/Navbar'
 import { Overview } from './components/Overview'
@@ -12,6 +15,7 @@ import { TripsSection } from './features/trips/TripsSection'
 
 function App() {
   const { user, isLoading } = useAuth()
+  const [selectedTrip, setSelectedTrip] = useState<Trip | null>(null)
 
   if (isLoading) {
     return (
@@ -29,15 +33,38 @@ function App() {
     )
   }
 
+  if (!selectedTrip) {
+    return (
+      <>
+        <Navbar />
+
+        <main>
+          <TripsSection onSelectTrip={setSelectedTrip} />
+        </main>
+      </>
+    )
+  }
+
   return (
     <>
       <Navbar />
-      <Hero />
+
+      <Hero trip={selectedTrip} />
 
       <main>
-        <TripsSection />
-        <Overview />
-        <ItinerarySection />
+        <section className="trip-context-bar">
+          <button type="button" className="trip-back-button" onClick={() => setSelectedTrip(null)}>
+            ← Minhas viagens
+          </button>
+
+          <div>
+            <span>VIAGEM ATUAL</span>
+            <strong>{selectedTrip.name}</strong>
+          </div>
+        </section>
+
+        <Overview trip={selectedTrip} />
+        <ItinerarySection trip={selectedTrip} />
         <CitiesSection />
         <ExperiencesSection />
         <FinanceSection />

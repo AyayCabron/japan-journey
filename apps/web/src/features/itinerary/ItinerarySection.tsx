@@ -1,46 +1,118 @@
-import { itineraryItems, type ItineraryCategory } from './itineraryData'
+import { useEffect, useState } from 'react'
+import type { ItineraryDay, Trip } from '@japan-journey/types'
 
-const categoryLabels: Record<ItineraryCategory, string> = {
-  travel: 'Deslocamento',
-  culture: 'Cultura',
-  tech: 'Tecnologia',
-  food: 'Alimentação',
-  shop: 'Compras / bugigangas',
-  park: 'Parques',
+import { itineraryClient } from '../../services/apiSdk'
+
+interface ItinerarySectionProps {
+  trip: Trip
 }
 
-const categories = Object.entries(categoryLabels) as [ItineraryCategory, string][]
+function formatDate(date: string) {
+  return new Intl.DateTimeFormat('pt-BR', {
+    weekday: 'long',
+    day: '2-digit',
+    month: 'long',
+  }).format(new Date(`${date}T00:00:00`))
+}
 
-export function ItinerarySection() {
+export function ItinerarySection({ trip }: ItinerarySectionProps) {
+  const [days, setDays] = useState<ItineraryDay[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let isActive = true
+
+    itineraryClient
+      .list(trip.id)
+      .then((result) => {
+        if (!isActive) {
+          return
+        }
+
+        setDays(result)
+        setError('')
+      })
+      .catch((requestError: unknown) => {
+        if (!isActive) {
+          return
+        }
+
+        setError(
+          requestError instanceof Error
+            ? requestError.message
+            : 'Não foi possível carregar o roteiro.',
+        )
+      })
+      .finally(() => {
+        if (isActive) {
+          setIsLoading(false)
+        }
+      })
+
+    return () => {
+      isActive = false
+    }
+  }, [trip.id])
+
   return (
-    <section id="itinerary" className="section alt">
+    <section id="itinerary" className="section">
       <div className="section-head">
-        <p className="eyebrow">行程 — 02</p>
-        <h2>Linha do tempo</h2>
+        <div>
+          <p className="eyebrow">旅程 — 02</p>
+          <h2>Roteiro</h2>
+
+          <p className="section-desc">Planejamento diário de {trip.name}.</p>
+        </div>
       </div>
 
-      <div className="tl-legend">
-        {categories.map(([category, label]) => (
-          <span key={category} className={`tl-tag tag-${category}`}>
-            {label}
-          </span>
-        ))}
-      </div>
+      {error && <p className="trip-error">{error}</p>}
 
-      <div className="timeline">
-        {itineraryItems.map((item, index) => (
-          <article key={`${item.title}-${index}`} className="tl-item">
-            <span className="tl-dot" />
+      {isLoading ? (
+        <p className="trip-empty">Carregando roteiro...</p>
+      ) : days.length === 0 ? (
+        <div className="trip-empty">
+          <strong>Roteiro ainda vazio.</strong>
 
-            <div>
-              <span className={`tl-tag tag-${item.category}`}>{item.categoryLabel}</span>
+          <p>Nenhum dia foi adicionado a esta viagem.</p>
+        </div>
+      ) : (
+        <div className="itinerary-days">
+          {days.map((day) => (
+            <article key={day.id} className="itinerary-day">
+              <div className="itinerary-day-header">
+                <div>
+                  <span className="card-label">{formatDate(day.date)}</span>
 
-              <strong>{item.title}</strong>
-              <p>{item.description}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+                  <h3>{day.title ?? 'Dia de viagem'}</h3>
+                </div>
+              </div>
+
+              {day.notes && <p>{day.notes}</p>}
+
+              {day.items.length === 0 ? (
+                <p className="trip-empty">Nenhuma atividade neste dia.</p>
+              ) : (
+                <div className="itinerary-items">
+                  {day.items.map((item) => (
+                    <div key={item.id} className="itinerary-item">
+                      <div>
+                        <span className="card-label">
+                          {item.startTime ? item.startTime.slice(0, 5) : 'Sem horário'}
+                        </span>
+
+                        <strong>{item.title}</strong>
+
+                        {item.locationName && <p>{item.locationName}</p>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      )}
     </section>
   )
 }

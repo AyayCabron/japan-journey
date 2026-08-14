@@ -19,7 +19,7 @@ def create_slug(name: str) -> str:
     return f"{normalized}-{suffix}"
 
 
-async def list_trips(request, env):
+async def list_trips(request, env, params):
     access_token = get_bearer_token(request)
 
     if not access_token:
@@ -44,7 +44,7 @@ async def list_trips(request, env):
     )
 
 
-async def create_trip(request, env):
+async def create_trip(request, env, params):
     access_token = get_bearer_token(request)
 
     if not access_token:

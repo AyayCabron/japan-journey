@@ -1,48 +1,27 @@
-export function Hero() {
+import type { Trip } from '@japan-journey/types'
+
+interface HeroProps {
+  trip: Trip
+}
+
+export function Hero({ trip }: HeroProps) {
   return (
-    <header id="hero">
-      <div className="hero-bg">
-        <div className="hero-glow g1" />
-        <div className="hero-glow g2" />
-        <div className="hero-grid" />
-      </div>
-
+    <section className="hero">
       <div className="hero-content">
-        <p className="hero-eyebrow">六人 · 二十日 · 一つの旅</p>
+        <p className="eyebrow">日本旅行</p>
 
-        <h1 className="hero-title">
-          JAPAN <span>2028</span>
-        </h1>
+        <h1>{trip.name}</h1>
 
-        <p className="hero-sub">The Journey Begins</p>
+        <p className="hero-copy">{trip.destinationCountry}</p>
 
-        <div className="hero-stats">
-          <div>
-            <strong>6</strong>
-            <span>Travelers</span>
-          </div>
+        <div className="hero-meta">
+          <span>{trip.startDate ?? 'Data inicial não definida'}</span>
 
-          <div className="dot" />
+          <i>→</i>
 
-          <div>
-            <strong>20</strong>
-            <span>Days</span>
-          </div>
-
-          <div className="dot" />
-
-          <div>
-            <strong>∞</strong>
-            <span>Memories</span>
-          </div>
+          <span>{trip.endDate ?? 'Data final não definida'}</span>
         </div>
-
-        <a href="#overview" className="btn-primary">
-          Begin the Adventure →
-        </a>
       </div>
-
-      <div className="scroll-hint">scroll</div>
-    </header>
+    </section>
   )
 }

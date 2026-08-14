@@ -2,6 +2,10 @@ import { useEffect, useState, type FormEvent } from 'react'
 import type { Trip } from '@japan-journey/types'
 import { tripClient } from '../../services/apiSdk'
 
+interface TripsSectionProps {
+  onSelectTrip: (trip: Trip) => void
+}
+
 interface TripFormState {
   name: string
   destinationCountry: string
@@ -16,9 +20,9 @@ const initialForm: TripFormState = {
   endDate: '',
 }
 
-export function TripsSection() {
+export function TripsSection({ onSelectTrip }: TripsSectionProps) {
   const [trips, setTrips] = useState<Trip[]>([])
-  const [form, setForm] = useState(initialForm)
+  const [form, setForm] = useState<TripFormState>(initialForm)
   const [isLoading, setIsLoading] = useState(true)
   const [isCreating, setIsCreating] = useState(false)
   const [isFormOpen, setIsFormOpen] = useState(false)
@@ -69,12 +73,13 @@ export function TripsSection() {
   }
 
   return (
-    <section className="trips-section">
-      <div className="section-heading">
+    <section className="section trips-section">
+      <div className="section-head trips-section-head">
         <div>
-          <span className="section-kicker">旅行 — VIAGENS</span>
+          <p className="eyebrow">旅行 — VIAGENS</p>
           <h2>Minhas viagens</h2>
-          <p>Crie e organize seus planejamentos de viagem.</p>
+
+          <p className="section-desc">Crie e organize seus planejamentos de viagem.</p>
         </div>
 
         <button
@@ -164,17 +169,26 @@ export function TripsSection() {
       ) : (
         <div className="trip-grid">
           {trips.map((trip) => (
-            <article key={trip.id} className="trip-card">
+            <button
+              key={trip.id}
+              type="button"
+              className="trip-card"
+              onClick={() => onSelectTrip(trip)}
+            >
               <span className="card-label">{trip.destinationCountry}</span>
 
               <h3>{trip.name}</h3>
 
               <div className="trip-card-dates">
                 <span>{trip.startDate ?? 'Data não definida'}</span>
+
                 <i>→</i>
+
                 <span>{trip.endDate ?? 'Data não definida'}</span>
               </div>
-            </article>
+
+              <span className="trip-card-open">Abrir viagem →</span>
+            </button>
           ))}
         </div>
       )}

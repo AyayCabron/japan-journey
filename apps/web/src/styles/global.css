@@ -1842,3 +1842,67 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+.trip-card {
+  width: 100%;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.045);
+}
+
+.trip-card-open {
+  display: block;
+  margin-top: 20px;
+  color: var(--red);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.trip-context-bar {
+  width: min(100% - 40px, 1200px);
+  margin: 32px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.trip-context-bar > div {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+}
+
+.trip-context-bar span {
+  color: var(--muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+}
+
+.trip-context-bar strong {
+  font-size: 0.95rem;
+}
+
+.trip-back-button {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+}
+
+.trip-back-button:hover {
+  color: var(--text);
+}
